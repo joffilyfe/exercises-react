@@ -1,0 +1,120 @@
+@import "../styles/config.scss";
+@import "../styles/colors.scss";
+
+// Component container
+.addExerciseContainer {
+  background-color: $--secondary-color;
+  padding: $--padding-space-1;
+  max-width: 100%;
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: $--margin-space-3;
+}
+
+// Form and It instructions
+.addExerciseForm {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  align-items: flex-start;
+
+  & > * {
+    width: 100%;
+
+    @media screen and (min-width: $--bp-size-medium) {
+      flex: 1;
+    }
+  }
+}
+
+.formGroup {
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: $--margin-space-1;
+  width: 100%;
+
+  @media screen and (min-width: $--bp-size-medium) {
+    flex: 1;
+    margin: 0 ($--margin-space-1 / 2);
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  input,
+  select,
+  button,
+  label,
+  & > div {
+    width: 100%;
+  }
+
+  select option {
+    text-transform: capitalize;
+  }
+
+  .formLabel {
+    color: $--color-gray-700;
+    display: block;
+    font-weight: normal;
+    margin-bottom: $--margin-space-1;
+  }
+}
+
+.formGroup05 {
+  @media screen and (min-width: $--bp-size-medium) {
+    flex: 0.5;
+  }
+}
+
+.formInput,
+.formSelect,
+.submitButton {
+  height: calc(2.75rem + 2px);
+  width: 100%;
+}
+
+.formInput,
+.formSelect {
+  border: 1px solid $--secondary-color;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: darken($--secondary-color, 50);
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: $--padding-space-1;
+}
+
+.submitButton {
+  background-color: $--primary-color-lighten-10;
+  border: 1px solid $--primary-color-lighten-10;
+  border-radius: 4px;
+  color: $--primary-color-lighten-50;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: $--padding-space-1;
+
+  &:hover {
+    background-color: lighten($--primary-color-darken-10, 10);
+    border-color: lighten($--primary-color-darken-10, 10);
+  }
+}
+
+.submitButtonMarginTop {
+  @media screen and (min-width: $--bp-size-medium) {
+    margin-top: 32px;
+  }
+}
+
+.inputError {
+  font-size: 12px;
+  color: $--color-invalid-input;
+  display: block;
+  font-weight: bold;
+}
