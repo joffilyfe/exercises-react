@@ -26,7 +26,7 @@ describe("The ExerciseForm component", () => {
   test("should have the exercise type date update when the input date call the onChangeDate callback", () => {
     render(<ExerciseForm />);
     const dateInput = document.querySelector("#datePicker");
-    fireEvent.change(dateInput, { target: { value: "2020-01-01" } });
-    expect(dateInput.value).toBe("2020-01-01");
+    fireEvent.change(dateInput, { target: { value: "01/01/2020" } });
+    expect(dateInput.value).toBe("01/01/2020");
   });
 });

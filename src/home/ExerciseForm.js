@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SecondsInput from "./SecondsInput";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import styles from "./exerciseform.module.scss";
 
 class ExerciseForm extends React.Component {
@@ -35,10 +37,10 @@ class ExerciseForm extends React.Component {
     });
   }
 
-  onChangeDate(event) {
+  onChangeDate(date) {
     this.setState({
       ...this.state,
-      exercise: { ...this.state.exercise, date: event.target.value },
+      exercise: { ...this.state.exercise, date: date },
     });
   }
 
@@ -100,13 +102,16 @@ class ExerciseForm extends React.Component {
             <label className={styles.formLabel} htmlFor="datePicker">
               Select a date
             </label>
-            <input
+            <DatePicker
               id="datePicker"
               title="Inform a date of when this exercise occurred"
-              type="date"
-              value={this.state.exercise.date}
-              className={styles.formInput}
+              dateFormat="dd/MM/yyyy"
+              selected={this.state.exercise.date}
               onChange={this.onChangeDate}
+              className={styles.formInput}
+              placeholderText="dd/mm/yyyy"
+              showDisabledMonthNavigation
+              autoComplete="off"
             />
             <span className={styles.inputError}>{this.state.errors.date}</span>
           </div>
