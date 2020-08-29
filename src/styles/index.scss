@@ -1,0 +1,54 @@
+@import "~normalize.css";
+@import "./config.scss";
+@import "./colors.scss";
+@import "./fonts";
+
+* {
+  box-sizing: border-box;
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+html {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+// A simple replace for grid
+.container {
+  width: 100%;
+  padding-right: $--padding-space-2;
+  padding-left: $--padding-space-2;
+  margin: 0 auto;
+
+  @media screen and (min-width: $--bp-size-small) {
+    max-width: 540px;
+  }
+  @media screen and (min-width: $--bp-size-medium) {
+    max-width: 720px;
+  }
+  @media screen and (min-width: $--bp-size-large) {
+    max-width: 960px;
+  }
+  @media screen and (min-width: $--bp-size-extra-larger) {
+    max-width: 1140px;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.col {
+  position: relative;
+  width: 100%;
+  flex: 1;
+}

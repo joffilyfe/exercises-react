@@ -1,0 +1,31 @@
+$--primary-color: #eb6f01; // orange
+$--secondary-color: #eeeeee;
+$--alternative-primary-color: #ff8600;
+
+// Primary color increasing darkness in 10%
+$--primary-color-darken-10: darken($--primary-color, 10);
+$--primary-color-darken-20: darken($--primary-color, 20);
+$--primary-color-darken-30: darken($--primary-color, 30);
+$--primary-color-darken-40: darken($--primary-color, 40);
+$--primary-color-darken-50: darken($--primary-color, 50);
+
+// Primary color increasing lightness in 10%
+$--primary-color-lighten-10: lighten($--primary-color, 10);
+$--primary-color-lighten-20: lighten($--primary-color, 20);
+$--primary-color-lighten-30: lighten($--primary-color, 30);
+$--primary-color-lighten-40: lighten($--primary-color, 40);
+$--primary-color-lighten-50: lighten($--primary-color, 50);
+
+// Helpers colors
+$--color-invalid-input: #b90000;
+
+$--color-gray-100: #f6f7f8;
+$--color-gray-200: #e9eef2;
+$--color-gray-300: #afbec9;
+$--color-gray-400: #8296a4;
+$--color-gray-500: #597183;
+$--color-gray-600: #495c69;
+$--color-gray-700: #3f4c55;
+$--color-gray-800: #384248;
+$--color-gray-900: #32383c;
+$--color-gray-1000: #1c2124;
