@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, getByTestId } from "@testing-library/react";
 import ExerciseForm from "./ExerciseForm";
 
 describe("The ExerciseForm component", () => {
@@ -12,8 +12,8 @@ describe("The ExerciseForm component", () => {
   test("should have the exercise seconds state update when the time input call the onChangeTime callback", () => {
     render(<ExerciseForm />);
     const timeInput = document.querySelector("#timePicker");
-    fireEvent.change(timeInput, { target: { value: 10 } });
-    expect(timeInput.value).toBe("10");
+    fireEvent.keyUp(timeInput, { target: { value: "00:00:01" } });
+    expect(timeInput.value).toBe("00:00:01");
   });
 
   test("should have the exercise type state update when the type select call the onChangeType callback", () => {

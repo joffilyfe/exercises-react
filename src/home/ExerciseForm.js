@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import SecondsInput from "./SecondsInput";
 import styles from "./exerciseform.module.scss";
 
 class ExerciseForm extends React.Component {
@@ -20,10 +21,10 @@ class ExerciseForm extends React.Component {
     this.onChangeType = this.onChangeType.bind(this);
   }
 
-  onChangeTime(event) {
+  onChangeTime({ seconds }) {
     this.setState({
       ...this.state,
-      exercise: { ...this.state.exercise, seconds: event.target.value },
+      exercise: { ...this.state.exercise, seconds },
     });
   }
 
@@ -58,13 +59,14 @@ class ExerciseForm extends React.Component {
             <label className={styles.formLabel} htmlFor="timePicker">
               Time spent
             </label>
-            <input
+            <SecondsInput
               id="timePicker"
+              testId={"seconds-input"}
               title="Type a quantity of spent in this exercise"
-              placeholder="0"
+              placeholder="00:55:00"
               value={this.state.exercise.seconds}
               className={styles.formInput}
-              onChange={this.onChangeTime}
+              onChangeTime={this.onChangeTime}
             />
             <span className={styles.inputError}>
               {this.state.errors.seconds}
