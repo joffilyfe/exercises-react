@@ -1,13 +1,19 @@
-import React from 'react';
+import React from "react";
+import Header from "./common/Header";
+import "./styles/index.scss";
 
-function App() {
-  return (
-    <div className="App">
-      <header>
-        <h1>Hello World</h1>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <Header />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;

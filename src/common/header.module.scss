@@ -1,0 +1,22 @@
+@import "../styles/config.scss";
+@import "../styles/colors";
+
+.headerContainer {
+  font-family: "Lato";
+  text-align: center;
+  padding: $--padding-space-2 0;
+  width: 100%;
+
+  @media screen and (min-width: $--bp-size-medium){
+    text-align: left;
+  }
+}
+
+.headerLogoName {
+  color: $--color-gray-1000;
+  margin: 0;
+
+  .headerLogoNameHighlight {
+    color: $--primary-color;
+  }
+}
