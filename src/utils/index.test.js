@@ -2,6 +2,7 @@ import {
   splitAndCalculateTime,
   formatTimeToString,
   parseTimeString,
+  validateExerciseForm,
 } from "./index";
 
 describe("The splitAndCalculateTime function", () => {
@@ -49,5 +50,72 @@ describe("The parseTimeString function", () => {
     let { timeString, seconds } = parseTimeString("00:70:00");
     expect(timeString).toBe("01:10:00");
     expect(seconds).toBe(4200);
+  });
+});
+
+describe("The validateExerciseForm function", () => {
+  test("should return if any erro are detected during the validation", () => {
+    let { errors, isValid } = validateExerciseForm({
+      exercise: { seconds: 0 },
+      exercisesOptions: [],
+    });
+    expect(isValid).toBe(false);
+    expect(errors.seconds).toBe("Please inform a time");
+  });
+
+  test("should haven't a seconds error if it was provided and greater than 0", () => {
+    let { errors } = validateExerciseForm({
+      exercise: { seconds: 1, date: new Date(), type: "run" },
+      exercisesOptions: ["run"],
+    });
+    expect(errors.seconds).toBe(null);
+  });
+
+  test("should return invalid if the seconds field is empty", () => {
+    let { errors } = validateExerciseForm({
+      exercise: { seconds: 1, date: new Date(), type: "run" },
+      exercisesOptions: ["run"],
+    });
+    expect(errors.seconds).toBe(null);
+  });
+
+  test("should haven't an exercise type error if a type was provided and the type is in the type list", () => {
+    let { errors } = validateExerciseForm({
+      exercise: { seconds: 1, date: new Date(), type: "run" },
+      exercisesOptions: ["run"],
+    });
+    expect(errors.type).toBe(null);
+  });
+
+  test("should return an exercise type error if a type was provided but the type isn't in the type list", () => {
+    let { errors } = validateExerciseForm({
+      exercise: { seconds: 1, date: new Date(), type: "run" },
+      exercisesOptions: ["other type"],
+    });
+    expect(errors.type).toBe("Please select an exercise");
+  });
+
+  test("should return a type error if the selectd field is empty", () => {
+    let { errors } = validateExerciseForm({
+      exercise: { seconds: 1, date: new Date(), type: null },
+      exercisesOptions: ["run"],
+    });
+    expect(errors.type).toBe("Please select an exercise");
+  });
+
+  test("should return a date error if the date field is empty", () => {
+    let { errors } = validateExerciseForm({
+      exercise: { seconds: 1, date: null, type: "run" },
+      exercisesOptions: ["run"],
+    });
+    expect(errors.date).toBe("Please select a date");
+  });
+
+  test("should return a isValid equals to true if none error was found", () => {
+    let { isValid } = validateExerciseForm({
+      exercise: { seconds: 1, date: new Date(), type: "run" },
+      exercisesOptions: ["run"],
+    });
+    expect(isValid).toBe(true);
   });
 });

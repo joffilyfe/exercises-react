@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import SecondsInput from "./SecondsInput";
 import DatePicker from "react-datepicker";
+import { validateExerciseForm } from "../utils";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./exerciseform.module.scss";
 
@@ -21,6 +22,22 @@ class ExerciseForm extends React.Component {
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onChangeTime = this.onChangeTime.bind(this);
     this.onChangeType = this.onChangeType.bind(this);
+    this.onSubmitForm = this.onSubmitForm.bind(this);
+  }
+
+  onSubmitForm(event) {
+    event.preventDefault();
+
+    let { errors, isValid } = validateExerciseForm({
+      exercise: this.state.exercise,
+      exercisesOptions: this.props.exercisesOptions,
+    });
+
+    this.setState({ ...this.state, errors: errors });
+
+    if (!isValid) {
+      return;
+    }
   }
 
   onChangeTime({ seconds }) {
@@ -56,7 +73,7 @@ class ExerciseForm extends React.Component {
         data-testid="exercise-form"
         className={styles.addExerciseContainer}
       >
-        <form className={styles.addExerciseForm} onSubmit={this.onAddExercise}>
+        <form className={styles.addExerciseForm} onSubmit={this.onSubmitForm}>
           <div data-testid="time-container" className={styles.formGroup}>
             <label className={styles.formLabel} htmlFor="timePicker">
               Time spent
@@ -119,6 +136,7 @@ class ExerciseForm extends React.Component {
           <div className={`${styles.formGroup} ${styles.formGroup05}`}>
             <button
               className={`${styles.submitButton} ${styles.submitButtonMarginTop}`}
+              onClick={this.onSubmitForm}
             >
               Add
             </button>

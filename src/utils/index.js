@@ -64,4 +64,40 @@ const parseTimeString = (time) => {
   return { timeString: timeString, seconds: timeInSeconds };
 };
 
-export { splitAndCalculateTime, formatTimeToString, parseTimeString };
+const validateExerciseForm = ({ exercise, exercisesOptions }) => {
+  let errors = {
+    seconds: null,
+    type: null,
+    date: null,
+  };
+
+  if (exercise?.seconds === 0 || exercise?.seconds === undefined) {
+    errors.seconds = "Please inform a time";
+  } else {
+    errors.seconds = null;
+  }
+
+  if (!exercisesOptions?.includes(exercise?.type)) {
+    errors.type = "Please select an exercise";
+  } else {
+    errors.type = null;
+  }
+
+  if (exercise?.date == null || exercise?.date?.length === 0) {
+    errors.date = "Please select a date";
+  } else {
+    errors.date = null;
+  }
+
+  let isValid =
+    Object.values(errors).filter((value) => value !== null).length === 0;
+
+  return { errors, isValid: isValid };
+};
+
+export {
+  splitAndCalculateTime,
+  formatTimeToString,
+  parseTimeString,
+  validateExerciseForm,
+};
