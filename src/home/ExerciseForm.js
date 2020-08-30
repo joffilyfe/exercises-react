@@ -4,7 +4,7 @@ import SecondsInput from "./SecondsInput";
 import DatePicker from "react-datepicker";
 import { validateExerciseForm } from "../utils";
 import { connect } from "react-redux";
-import { fetchExercisesOptions } from "./../redux/actions";
+import { addExercise, fetchExercisesOptions } from "./../redux/actions";
 import { getAllExercisesOptions } from "../redux/selectors";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./exerciseform.module.scss";
@@ -45,6 +45,7 @@ class ExerciseForm extends React.Component {
     if (!isValid) {
       return;
     }
+    this.props.addExercise(this.state.exercise);
   }
 
   onChangeTime({ seconds }) {
@@ -169,6 +170,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addExercise: (exercise) => {
+      dispatch(addExercise(exercise));
+    },
     fetchExercisesOptions: () => {
       dispatch(fetchExercisesOptions());
     },

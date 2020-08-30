@@ -1,4 +1,5 @@
 import {
+  ADD_EXERCISE,
   FETCH_EXERCISES_OPTIONS,
 } from "../actionTypes";
 
@@ -11,6 +12,14 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_EXERCISE: {
+      const { exercise } = action.payload;
+      const exercises = [...state.exercises, exercise];
+      return {
+        ...state,
+        exercises: exercises,
+      };
+    }
     case FETCH_EXERCISES_OPTIONS: {
       // fetch the exercise options from the web or
       // database or anywhere.
