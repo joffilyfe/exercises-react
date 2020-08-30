@@ -1,0 +1,45 @@
+@import "../styles/config.scss";
+@import "../styles/colors.scss";
+
+.headerContainer {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.headingPrincipal {
+  width: 100%;
+
+  @media screen and (min-width: $--bp-size-medium) {
+    flex: 1;
+  }
+}
+
+.headingSecondary {
+  width: 100%;
+  color: $--color-gray-300;
+
+  @media screen and (min-width: $--bp-size-medium) {
+    flex: 1;
+    text-align: right;
+  }
+}
+
+.removeExerciseButton {
+  background-color: $--secondary-color;
+  border: 1px solid $--secondary-color;
+  border-radius: 4px;
+  color: darken($--secondary-color, 30);
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: $--padding-space-1;
+
+  &:hover {
+    background-color: $--color-invalid-input;
+    border-color: $--color-invalid-input;
+    color: white;
+  }
+}

@@ -1,3 +1,6 @@
+import { intervalToDuration } from "date-fns";
+import formatDuration from "date-fns/formatDuration";
+
 const TIME_GROUPS_REGEX = /(\d{2}):(\d{2}):(\d{2})/;
 
 /**
@@ -95,9 +98,23 @@ const validateExerciseForm = ({ exercise, exercisesOptions }) => {
   return { errors, isValid: isValid };
 };
 
+/**
+ * Converts the seconds number into a readable human string like '1 hour' or
+ * '32 minutes and 6 seconds'.
+ *
+ * It uses the date-fns library.
+ * @param {int} seconds
+ */
+const humanizeSeconds = (seconds) => {
+  const durations = intervalToDuration({ start: 0, end: seconds * 1000 });
+  const humanized = formatDuration(durations);
+  return humanized ? humanized : "0 hour";
+};
+
 export {
   splitAndCalculateTime,
   formatTimeToString,
   parseTimeString,
   validateExerciseForm,
+  humanizeSeconds,
 };

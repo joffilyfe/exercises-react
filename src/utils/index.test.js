@@ -3,6 +3,7 @@ import {
   formatTimeToString,
   parseTimeString,
   validateExerciseForm,
+  humanizeSeconds,
 } from "./index";
 
 describe("The splitAndCalculateTime function", () => {
@@ -117,5 +118,27 @@ describe("The validateExerciseForm function", () => {
       exercisesOptions: ["run"],
     });
     expect(isValid).toBe(true);
+  });
+});
+
+describe("The humanizeSeconds funnction", () => {
+  test("should converts 3600 seconds to 1 hour", () => {
+    expect(humanizeSeconds(3600)).toBe("1 hour");
+  });
+
+  test("should converts 1800 seconds to 30 minutes", () => {
+    expect(humanizeSeconds(1800)).toBe("30 minutes");
+  });
+
+  test("should converts 86400 seconds to 1 day", () => {
+    expect(humanizeSeconds(86400)).toBe("1 day");
+  });
+
+  test("should converts 10 seconds to 10 seconds", () => {
+    expect(humanizeSeconds(10)).toBe("10 seconds");
+  });
+
+  test("should converts 60 seconds to 1 minute", () => {
+    expect(humanizeSeconds(60)).toBe("1 minute");
   });
 });
