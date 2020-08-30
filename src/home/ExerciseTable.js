@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import DataTable from "react-data-table-component";
 import { format } from "date-fns";
+import { connect } from "react-redux";
 import { humanizeSeconds } from "../utils/index";
+import { getAllExercises } from "../redux/selectors";
 import styles from "./exercisetable.module.scss";
 
 class ExerciseTable extends React.Component {
@@ -91,4 +93,9 @@ ExerciseTable.defaultProps = {
   exercises: [],
 };
 
-export default ExerciseTable;
+const mapStateToProps = (state) => {
+  const exercises = getAllExercises(state);
+  return { exercises };
+};
+
+export default connect(mapStateToProps, null)(ExerciseTable);
