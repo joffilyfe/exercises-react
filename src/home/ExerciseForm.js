@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import SecondsInput from "./SecondsInput";
 import DatePicker from "react-datepicker";
 import { validateExerciseForm } from "../utils";
+import { connect } from "react-redux";
+import { fetchExercisesOptions } from "./../redux/actions";
+import { getAllExercisesOptions } from "../redux/selectors";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./exerciseform.module.scss";
 
@@ -23,6 +26,10 @@ class ExerciseForm extends React.Component {
     this.onChangeTime = this.onChangeTime.bind(this);
     this.onChangeType = this.onChangeType.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchExercisesOptions();
   }
 
   onSubmitForm(event) {
@@ -155,4 +162,17 @@ ExerciseForm.defaultProps = {
   exercisesOptions: [],
 };
 
-export default ExerciseForm;
+const mapStateToProps = (state) => {
+  const exercisesOptions = getAllExercisesOptions(state);
+  return { exercisesOptions };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchExercisesOptions: () => {
+      dispatch(fetchExercisesOptions());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseForm);

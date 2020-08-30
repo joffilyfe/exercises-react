@@ -1,37 +1,46 @@
 import React from "react";
 import { render, fireEvent, getByTestId } from "@testing-library/react";
 import ExerciseForm from "./ExerciseForm";
+import configureStore from "redux-mock-store";
+
+const initialState = {
+  exercises: {
+    exercisesOptions: ["run"],
+  },
+};
+const mockStore = configureStore();
+const store = mockStore(initialState);
 
 describe("The ExerciseForm component", () => {
   test("should be rendered", () => {
-    const { getByTestId } = render(<ExerciseForm />);
+    const { getByTestId } = render(<ExerciseForm store={store} />);
     const exerciseForm = getByTestId("exercise-form");
     expect(exerciseForm).toBeInTheDocument();
   });
 
   test("should have the exercise seconds state update when the time input call the onChangeTime callback", () => {
-    render(<ExerciseForm />);
+    render(<ExerciseForm store={store} />);
     const timeInput = document.querySelector("#timePicker");
     fireEvent.keyUp(timeInput, { target: { value: "00:00:01" } });
     expect(timeInput.value).toBe("00:00:01");
   });
 
   test("should have the exercise type state update when the type select call the onChangeType callback", () => {
-    render(<ExerciseForm exercisesOptions={["other", "run"]} />);
+    render(<ExerciseForm exercisesOptions={["other", "run"]} store={store} />);
     const typeSelect = document.querySelector("#selectExercise");
     fireEvent.change(typeSelect, { target: { value: "run" } });
     expect(typeSelect.value).toBe("run");
   });
 
   test("should have the exercise type date update when the input date call the onChangeDate callback", () => {
-    render(<ExerciseForm />);
+    render(<ExerciseForm store={store} />);
     const dateInput = document.querySelector("#datePicker");
     fireEvent.change(dateInput, { target: { value: "01/01/2020" } });
     expect(dateInput.value).toBe("01/01/2020");
   });
 
   test("should require the time value and show the error if form is submited", () => {
-    const { getByText } = render(<ExerciseForm />);
+    const { getByText } = render(<ExerciseForm store={store} />);
     const addButton = getByText("Add");
     let errorElement = document.querySelector(
       "div[data-testid='time-container'] span"
@@ -42,7 +51,7 @@ describe("The ExerciseForm component", () => {
   });
 
   test("should show the error element if the input time was updated with a invalid time", () => {
-    const { getByText, getByTestId } = render(<ExerciseForm />);
+    const { getByText, getByTestId } = render(<ExerciseForm store={store} />);
     const addButton = getByText("Add");
     const timeInput = getByTestId("seconds-input");
 
@@ -56,7 +65,7 @@ describe("The ExerciseForm component", () => {
   });
 
   test("should hide the error element if the input time was updated with a valid time", () => {
-    const { getByText, getByTestId } = render(<ExerciseForm />);
+    const { getByText, getByTestId } = render(<ExerciseForm store={store} />);
     const addButton = getByText("Add");
     const timeInput = getByTestId("seconds-input");
 
@@ -70,7 +79,7 @@ describe("The ExerciseForm component", () => {
   });
 
   test("should require the exercise type and show the error if form is submited", () => {
-    const { getByText } = render(<ExerciseForm />);
+    const { getByText } = render(<ExerciseForm store={store} />);
     const addButton = getByText("Add");
     let errorElement = document.querySelector(
       "div[data-testid='exercise-type-container'] span"
@@ -82,7 +91,7 @@ describe("The ExerciseForm component", () => {
 
   test("should require the exercise type and show the error if form is submited", () => {
     const { getByText } = render(
-      <ExerciseForm exercisesOptions={["run", "other"]} />
+      <ExerciseForm exercisesOptions={["run", "other"]} store={store} />
     );
     const addButton = getByText("Add");
     let errorElement = document.querySelector(
@@ -95,7 +104,7 @@ describe("The ExerciseForm component", () => {
 
   test("should hide select type error if the type was selected", () => {
     const { getByText, getByTestId } = render(
-      <ExerciseForm exercisesOptions={["run"]} />
+      <ExerciseForm exercisesOptions={["run"]} store={store} />
     );
     const addButton = getByText("Add");
     const select = getByTestId("exercise-type");
