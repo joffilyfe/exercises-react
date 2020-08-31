@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import ExerciseTable from "./ExerciseTable";
 import configureStore from "redux-mock-store";
 
@@ -50,5 +50,32 @@ describe("When the initial state is initialized with an exercise list", () => {
     const { getAllByRole } = render(<ExerciseTable store={store} />);
     const rows = getAllByRole("row");
     expect(rows.length).toBe(exercises.length + 1);
+  });
+});
+
+describe("When the remove button is clicked", () => {
+  test("it should dispatch an action of type REMOVE_EXERCISE using the exercise id ", () => {
+    const { getAllByRole } = render(<ExerciseTable store={store} />);
+    const rows = getAllByRole("row");
+    const removeFirstExerciseButton = rows[1].querySelector("button");
+    const expectedPayload = {
+      type: "REMOVE_EXERCISE",
+      payload: { id: "uuid1" },
+    };
+
+    window.confirm = () => true;
+    fireEvent.click(removeFirstExerciseButton, {});
+    expect(store.getActions()).toEqual([expectedPayload]);
+  });
+
+  test("it should display an confirm dialog to confirm the exercise deletion", () => {
+    const { getAllByRole } = render(<ExerciseTable store={store} />);
+    const rows = getAllByRole("row");
+    const removeFirstExerciseButton = rows[1].querySelector("button");
+    const onRemoveSpy = jest.fn();
+
+    window.confirm = () => onRemoveSpy();
+    fireEvent.click(removeFirstExerciseButton, {});
+    expect(onRemoveSpy).toBeCalledTimes(1);
   });
 });

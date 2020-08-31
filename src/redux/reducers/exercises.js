@@ -1,5 +1,6 @@
 import {
   ADD_EXERCISE,
+  REMOVE_EXERCISE,
   FETCH_EXERCISES_OPTIONS,
 } from "../actionTypes";
 
@@ -15,6 +16,16 @@ const reducer = (state = initialState, action) => {
     case ADD_EXERCISE: {
       const { exercise } = action.payload;
       const exercises = [...state.exercises, exercise];
+      return {
+        ...state,
+        exercises: exercises,
+      };
+    }
+    case REMOVE_EXERCISE: {
+      const { id } = action.payload;
+      const exercises = state.exercises.filter(
+        (exercise) => exercise.id !== id
+      );
       return {
         ...state,
         exercises: exercises,

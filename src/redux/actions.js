@@ -1,5 +1,6 @@
 import {
   ADD_EXERCISE,
+  REMOVE_EXERCISE,
   FETCH_EXERCISES_OPTIONS,
 } from "./actionTypes";
 import { v4 as uuid } from "uuid";
@@ -12,6 +13,17 @@ export const addExercise = (exercise) => ({
   type: ADD_EXERCISE,
   payload: {
     exercise: { id: uuid(), ...exercise },
+  },
+});
+
+/**
+ * Removes the exercise from the store
+ * @param {string} id
+ */
+export const removeExercise = (id) => ({
+  type: REMOVE_EXERCISE,
+  payload: {
+    id: id,
   },
 });
 

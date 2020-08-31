@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { connect } from "react-redux";
 import { humanizeSeconds } from "../utils/index";
 import { getAllExercises } from "../redux/selectors";
+import { removeExercise } from "../redux/actions";
 import styles from "./exercisetable.module.scss";
 
 class ExerciseTable extends React.Component {
@@ -37,7 +38,8 @@ class ExerciseTable extends React.Component {
           <button
             className={styles.removeExerciseButton}
             onClick={() => {
-              window.confirm("Are you sure you wish to delete this item?");
+              window.confirm("Are you sure you wish to delete this item?") &&
+                this.props.removeExercise(id);
             }}
           >
             Delete
@@ -98,4 +100,12 @@ const mapStateToProps = (state) => {
   return { exercises };
 };
 
-export default connect(mapStateToProps, null)(ExerciseTable);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeExercise: (id) => {
+      dispatch(removeExercise(id));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseTable);
