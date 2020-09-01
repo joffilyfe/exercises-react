@@ -4,3 +4,4 @@ Além do `README` padrão, este diretório deve conter documentações técnicas
 
 ## Sumário
 - [Decisões técnicas](001-decisoes-tecnicas.md)
+- [Decisões não técnicas](002-decisoes-nao-tecnicas.md)
