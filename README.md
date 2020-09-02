@@ -6,6 +6,8 @@ Merchan a parte, este repositório tem o intuito de demonstrar habilidades de fr
 
 ![Workout Log - Screenshot](docs/appscreen.png)
 
+Acesse a demonstração em https://joffilyfe.github.io/workoutlog.
+
 ## Sumário
 - [1 - Instalando a aplicação em modo desenvolvimento](#1---instalando-a-aplicação-em-modo-desenvolvimento)
     - [1.1 - Dependências](#11---dependências)
