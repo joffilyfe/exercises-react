@@ -19,3 +19,13 @@ Para trabalhos futuros eu observo que o cadastro de exercícios deveria ser feit
 A página inicial deve manter a listagem dos últimos exercícios mas também deve conter métodos de filtro.
 
 A página inicial também poderia exibir um gráfico com a média de tempo por dia, e poderia utilizar uma ferramenta como o https://recharts.org/. Penso que este componente agregue uma boa usabilidade de _informação_ para o usuário. 
+
+## 3 - Git flow
+
+Todos os commits deste repositório foram feitos direto na master, não foram utilizadas _features branches_ e _pull requests_. Entendo que a partir do momento em que o projeto passa a ter contribuições essa métodologia dêva ser adotada.
+
+Para futuras contribuções o fluxo deve serguir as seguintes normas:
+
+- Fork
+- Feature branch
+- Pull Request para master
